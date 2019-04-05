@@ -17,16 +17,15 @@ authenticationRoute(app);
 export const addToFavorites = async (userID, movie) => {
   let db = await connectDB();
   let collection = db.collection("users");
-  await collection.update(
-    { _id: userID },
-    { $addToSet: { favorites: [movie] } }
-  );
+  await collection.updateOne({ id: userID }, { $push: { favorites: movie } });
 };
 
 export const removeFromFavorites = async (userID, movie) => {
   let db = await connectDB();
   let collection = db.collection("users");
-  await collection.update({ _id: userID }, { $pull: { favorites: [movie] } });
+  await collection.update({ id: userID }, { $pull: { favorites: { movie } } });
+  collection = db.collection("users");
+  console.log("collection", collection);
 };
 
 app.post("/favorites/add", async (req, res) => {

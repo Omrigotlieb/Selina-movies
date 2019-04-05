@@ -5,6 +5,17 @@ import * as mutations from "./mutations";
 import { history } from "./history";
 const url = "http://localhost:7777";
 
+export function* addToFavoritesSaga() {
+  while (true) {
+    const { userID, movie } = yield take(mutations.ADD_TO_FAVORITES);
+    const { data } = yield axios.post(url + `/favorites/add`, {
+      userID,
+      movie
+    });
+    yield put(mutations.setState(data.state));
+  }
+}
+
 export function* userCreationSaga() {
   while (true) {
     const { username, password } = yield take(mutations.REQUEST_USER_CREATION);

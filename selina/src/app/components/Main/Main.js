@@ -15,11 +15,12 @@ import "./Main.css";
 import loader from "../../../assets/loader.gif";
 
 function PrivateRoute({ component: Component, ...rest }) {
+  let auth = store.getState().session.authenticated;
   return (
     <Route
       {...rest}
       render={props =>
-        store.getState().session.authenticated ? (
+        auth ? (
           <Component {...props} />
         ) : (
           <Redirect

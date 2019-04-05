@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { store } from "../../store";
+import * as mutations from "../../store/mutations";
 import "./MovieCard.css";
 
 class MovieCard extends React.Component {
@@ -9,15 +10,16 @@ class MovieCard extends React.Component {
   }
 
   render() {
-    let { item, key } = this.props;
+    let { movie, key, like, unlike, favorites, match, userID } = this.props;
+    let isFavorite = favorites.filter(item => item.id === movie.id).length;
     let url = "https://image.tmdb.org/t/p/w500/";
-    let imgSrc = `${url}${item["poster_path"]}`;
+    let imgSrc = `${url}${movie["poster_path"]}`;
     let state = store.getState();
-    let overview = item.overview;
+    let overview = movie.overview;
     let shortOverview = overview ? overview.slice(0, 207) + "..." : "";
-    let title = item.title;
-    let vote_average = item["vote_average"];
-    let release_date = item["release_date"];
+    let title = movie.title;
+    let vote_average = movie["vote_average"];
+    let release_date = movie["release_date"];
 
     return (
       <div className="container" key={key}>
@@ -26,8 +28,20 @@ class MovieCard extends React.Component {
             <i className="fa fa-star" aria-hidden="true" />
             <span>{vote_average}</span>
           </div>
+
           <div className="poster">
             <img src={imgSrc} />
+          </div>
+          <div className="heart">
+            {isFavorite ? (
+              <div className="like" onClick={() => unlike(userID, movie)}>
+                <i className="fa fa-heart" aria-hidden="true" />
+              </div>
+            ) : (
+              <div className="like" onClick={() => like(userID, movie)}>
+                <i className="fa fa-heart-o" aria-hidden="true" />
+              </div>
+            )}
           </div>
           <div className="details">
             <h2>{title}</h2>
@@ -51,8 +65,23 @@ class MovieCard extends React.Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => ({});
+const mapStateToProps = state => ({
+  favorites: state.favorites,
+  match: state.match,
+  userID: state.session.id
+});
 
-const mapDispatchToProps = dispatch => ({});
-
-export const ConnectedMovieCard = connect(state => state)(MovieCard);
+const mapDispatchToProps = dispatch => {
+  return {
+    like(userID, movie) {
+      dispatch(mutations.addToFavorites(userID, movie));
+    },
+    unlike(userID, movie) {
+      dispatch(mutations.removeFromFavorites(userID, movie));
+    }
+  };
+};
+export const ConnectedMovieCard = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MovieCard);

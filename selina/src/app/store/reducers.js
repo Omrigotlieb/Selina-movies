@@ -23,12 +23,18 @@ export const reducer = combineReducers({
         return userSession;
     }
   },
-  users(users = [], action) {
+  favorites(favorites = [], action) {
+    let { userID, movie } = action;
     switch (action.type) {
       case mutations.SET_STATE:
-        return action.state.users || users;
+        return action.state.favorites || favorites;
+      case mutations.ADD_TO_FAVORITES:
+        return [...favorites, movie];
+      case mutations.REMOVE_FROM_FAVORITES:
+        favorites = favorites.filter(item => item.id !== movie.id);
+        return favorites;
       default:
-        return users;
+        return favorites;
     }
   }
 });

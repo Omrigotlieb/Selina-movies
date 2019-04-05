@@ -1,9 +1,4 @@
-/* @import url(https://fonts.googleapis.com/css?family=Poiret+One|PT+Sans+Narrow:400,700); */
-@import url('https://fonts.googleapis.com/css?family=PT+Sans');
 @import url('https://fonts.googleapis.com/css?family=Bangers');
-
-
-
 
 .container {
   position: relative;
@@ -92,14 +87,19 @@
 
 .rating .fa{
   color: #f7f406;
-  font-size: 50px;
+  filter: blur(2px);
+  font-size: 48px;
+  transform: blur(5px);
+  z-index: 1;
 }
 
 .rating span {
   font-family: 'Bangers', cursive;
-  color: #000000;
-  margin-left: -35px;
-  line-height: 50px;
+    color: #000000;
+    margin-left: -32px;
+    line-height: 50px;
+    z-index: 3;
+    filter: drop-shadow(5px 5px 5px black);
 }
 
 div.tags {
@@ -124,15 +124,15 @@ div.tags {
 }
 
 div.romance {
-  background-color: red;
+  background-color: palevioletred;
 }
 
 div.fantasy {
-  background-color: blue;
+  background-color: cadetblue;
 }
 
 div.comedy {
-  background-color: green;
+  background-color: coral;
 }
 
 .info {
@@ -146,4 +146,15 @@ div.comedy {
 
 .date {
   color: #ffffff;
+}
+
+.heart {
+  color: red;
+  filter: drop-shadow(5px 5px 5px black);
+  z-index: 3;
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top: 10px;
+  left: 10px;
 }

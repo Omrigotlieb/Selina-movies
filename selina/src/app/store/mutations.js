@@ -5,10 +5,24 @@ export const AUTHENTICATING = "AUTHENTICATING";
 export const AUTHENTICATED = "AUTHENTICATED";
 export const NOT_AUTHENTICATED = "NOT_AUTHENTICATED";
 export const SET_STATE = "SET_STATE";
+export const ADD_TO_FAVORITES = "ADD_TO_FAVORITES";
+export const REMOVE_FROM_FAVORITES = "REMOVE_FROM_FAVORITES";
 
 export const setState = (state = {}) => ({
   type: SET_STATE,
   state
+});
+
+export const addToFavorites = (userID, movie) => ({
+  type: ADD_TO_FAVORITES,
+  userID,
+  movie
+});
+
+export const removeFromFavorites = (userID, movie) => ({
+  type: REMOVE_FROM_FAVORITES,
+  userID,
+  movie
 });
 
 export const requestAuthenticateUser = (username, password) => ({

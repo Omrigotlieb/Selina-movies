@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
+a:focus {
+    outline: none;
+}
+
 .login-container {
   position: absolute;
   top: 45px;

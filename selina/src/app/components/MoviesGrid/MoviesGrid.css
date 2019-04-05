@@ -1,5 +1,6 @@
 /* @import url(https://fonts.googleapis.com/css?family=Poiret+One|PT+Sans+Narrow:400,700); */
 @import url('https://fonts.googleapis.com/css?family=PT+Sans');
+@import url('https://fonts.googleapis.com/css?family=Allan');
 
 .container-grid {
   justify-content: center;
@@ -12,4 +13,23 @@
   top: 65px;
   width: 1280px;
   height: 650px;
+}
+
+.not-found {
+  position: absolute;
+  align-items: center;
+  display: flex;
+  top: 30%;
+  left: 54%;
+  transform: translate(-50%,-50%);
+}
+
+.not-found img {
+  height: 120px;
+  width: 120px;
+}
+
+.not-found span {
+  font-family: 'Allan', cursive;
+  font-size: 60px;
 }

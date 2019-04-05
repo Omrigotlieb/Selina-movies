@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import React from "react";
-import logo from "../../../assets/logo_purple.png";
+import logo from "../../../assets/logo.png";
 import "./Navigation.css";
 
 const Navigation = () => (
@@ -18,6 +18,11 @@ const Navigation = () => (
       <Link to="/favorites">
         <span className="nav-item">
           <i className="fa fa-heart" aria-hidden="true" />
+        </span>
+      </Link>
+      <Link to="/admin">
+        <span className="nav-item">
+          <i className="fa fa-user" aria-hidden="true" />
         </span>
       </Link>
       <Link className="about" to="/about">

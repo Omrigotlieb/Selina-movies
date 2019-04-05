@@ -4,26 +4,47 @@ import { store } from "../../store";
 import "./MoviesGrid.css";
 import { results } from "../../../data/movies";
 import { ConnectedMovieCard } from "../MovieCard/MovieCard";
+import notfound from "../../../assets/notfound.png";
 class MoviesGrid extends React.Component {
   constructor(props) {
     super(props);
   }
 
   render() {
-    let moviesData = results();
+    let { match } = this.props;
+    let favoritesMovies = store.getState().favorites;
+    let favoriteMode = match && match.path === "/favorites";
+    let moviesData =
+      favoriteMode && favoritesMovies ? favoritesMovies : results();
     return (
       <div className="container-grid">
-        {moviesData &&
+        {favoriteMode && !favoritesMovies.length ? (
+          <div className="not-found">
+            <img src={notfound} />
+            <span>
+              <br />
+              You don't have any favorite movies?
+            </span>
+          </div>
+        ) : (
+          moviesData &&
           moviesData
             .slice(0, 12)
-            .map((item, i) => <ConnectedMovieCard item={item} key={i} />)}
+            .map((movie, i) => <ConnectedMovieCard movie={movie} key={i} />)
+        )}
       </div>
     );
   }
 }
 
-const mapStateToProps = (state, ownProps) => ({});
+const mapStateToProps = ({ favorites, location }) => ({
+  favorites,
+  location
+});
 
 const mapDispatchToProps = dispatch => ({});
 
-export const ConnectedMoviesGrid = connect(state => state)(MoviesGrid);
+export const ConnectedMoviesGrid = connect(
+  null,
+  mapStateToProps
+)(MoviesGrid);

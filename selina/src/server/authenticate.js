@@ -9,9 +9,8 @@ async function createUserState(user) {
 
   let favorites = await db
     .collection("users")
-    .find({ owner: user.id })
+    .find({ id: user.id })
     .toArray();
-  console.log("favorites:", favorites);
 
   return {
     favorites,
