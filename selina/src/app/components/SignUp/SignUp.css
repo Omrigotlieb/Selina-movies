@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+.login-container {
+  position: absolute;
+  top: 45px;
+  font-family: 'Roboto', sans-serif;
+  width: 1280px;
+  height: 650px;
+  border-radius: 8px;
+  background-size: auto;
+  background-image: url('../../../assets/subpattern.png');
+}
+
+.login-form {
+  text-align: center;
+  width: 388px;
+  height: 404px;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2);
+  background-color: #ffffff;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+
+.login-title {
+  width: 100%;
+  height: 48px;
+  font-size: 49px;
+  font-weight: bold;
+  line-height: 1.33;
+  letter-spacing: normal;
+  color: #764ABC;
+}
+
+.login-titles {
+  height: 85px;
+  width: 388px;
+}
+
+.login-titles div {
+  padding-top: 20px;
+}
+
+.login-second-title {
+    margin-top: -28px;
+}
+
+ .username-title {
+    text-align: left;
+ }
+
+ .password-title {
+   text-align: left;
+ }
+
+.username, .password {
+   padding-top: 40px;
+   display: inline-block;
+   text-align: left;
+}
+
+.remember-area {
+  display: flex;
+  margin-left: 27px;
+  margin-top: 17px;
+}
+
+
+.sign-up-button {
+  width: 113px;
+  height: 42px;
+  border-radius: 21px;
+  background-color: #764ABC;
+}
+
+.sign-in {
+  margin: 0 auto;
+}
+
+.sign {
+  align-items: center;
+  display: flex;
+  margin-top: 15px;
+}
+
+.login-button-title {
+  width: 53px;
+  height: 24px;
+  font-size: 16px;
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: center;
+  color: #ffffff;
+}
+
+.failed-title {
+  color: red;
+}

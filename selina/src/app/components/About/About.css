@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css?family=Merienda+One');
+
+.about-container {
+  position: absolute;
+  top: 88px;
+  display: flex;
+  flex-direction: column;
+}
+
+.text-container {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+h1 {
+  top: 0;
+  flex-wrap: wrap-reverse;
+  font-size: 118px;
+  margin: 0;
+  font-family: 'Merienda One', cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.about-text p {
+  font-family: 'Merienda One', cursive;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.about-bg-img {
+  width: 1500px;
+  height: 700px;
+  background: url("../../../assets/about-bg.jpg") no-repeat center center fixed;
+  background-size: cover;
+}
+
+.about-text {
+  display: block;
+  width: 500px;
+  left: 206px;
+  position: relative;
+  margin-top: -40px;
+}
+
+.omri-pic {
+  width: 120px;
+  height: 152px;
+  left: 0px;
+  top: 77%;
+  transform: scaleX(-3.5) scaleY(3.5);
+  position: absolute;
+}
+
+.social {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.2rem;
+  display: flex;
+  flex-direction: row;
+}
+
+.social-container {
+  left: 37%;
+  position: relative;
+}
+
+div.icon {
+  border-radius: 50%;
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  text-decoration: none;
+  color: #fff;
+  margin-right: 10px;
+  transition: .5s;
+}
+
+div.icon:hover{
+  border-radius: 0%;
+}
+
+.icon {
+    width: 40px;
+    height: 40px;
+    position: relative;
+    margin: 10px 6px;
+}
+
+.social-link:visited, .social-link:active, a[href^="mailto"]{
+  text-decoration: none;
+  color: white;
+}
+
+.facebook {
+  background: #3b5998;
+}
+
+.email {
+  background: #9C0F16;
+}
+
+.github {
+  background: #333;
+}
+
+.linkedin {
+  background: #0077b5;
+}

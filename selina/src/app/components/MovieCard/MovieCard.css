@@ -1,0 +1,149 @@
+/* @import url(https://fonts.googleapis.com/css?family=Poiret+One|PT+Sans+Narrow:400,700); */
+@import url('https://fonts.googleapis.com/css?family=PT+Sans');
+@import url('https://fonts.googleapis.com/css?family=Bangers');
+
+
+
+
+.container {
+  position: relative;
+  width: 300px;
+  height: 450px;
+}
+
+.card {
+  font-family: 'PT Sans', sans-serif;
+  position: relative;
+  width: 290px;
+  height: 400px;
+  background: #000000;
+  overflow: hidden;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.5);
+}
+
+.card .poster::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -180px;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(0deg, #000000 50%, transparent);
+  transition: 0.5s;
+  z-index: 1;
+}
+
+.card:hover .poster::before {
+  bottom:0;
+}
+
+.card .poster {
+  position: relative;
+  overflow: hidden;
+}
+
+.card .poster img {
+  width: 100%;
+  transition: 0.5s;
+}
+
+.card:hover .poster img {
+  filter: blur(5px);
+  transform: translateY(-50px);
+}
+
+.details {
+  position: absolute;
+  padding: 20px;
+  width: 100%;
+  height: 78%;
+  left: 0;
+  bottom: -186px;
+  box-sizing: border-box;
+  transition: 0.5s;
+  z-index: 2;
+}
+
+.card:hover .details {
+  bottom: 0;
+}
+
+.details h2 {
+  color: #ffffff;
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+}
+
+.details h2 + span {
+  color: #ff9800;
+  font-size: 14px;
+}
+
+.rating {
+  position: relative;
+  margin-bottom: -63px;
+  background: transparent;
+  z-index: 2;
+  display: flex;
+  justify-content: flex-end;
+  transform: translateY(-66px) rotate(30deg);
+}
+
+.rating .fa{
+  color: #f7f406;
+  font-size: 50px;
+}
+
+.rating span {
+  font-family: 'Bangers', cursive;
+  color: #000000;
+  margin-left: -35px;
+  line-height: 50px;
+}
+
+div.tags {
+  display: flex;
+}
+
+.tags div {
+  position: relative;
+  margin-top: 5px;
+  display: block;
+  color: white;
+  border-radius: 50px;
+  font-size: 10px;
+  line-height: 12px;
+  width: 46px;
+  text-align: center;
+  margin-right: 5px;
+}
+
+.tag span {
+  padding: 2px 5px;
+}
+
+div.romance {
+  background-color: red;
+}
+
+div.fantasy {
+  background-color: blue;
+}
+
+div.comedy {
+  background-color: green;
+}
+
+.info {
+  color: #ffffff;
+  padding-top: 27px;
+}
+
+.info p {
+  margin: 15px 0 10px;
+}
+
+.date {
+  color: #ffffff;
+}

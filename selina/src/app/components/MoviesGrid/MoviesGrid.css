@@ -1,0 +1,15 @@
+/* @import url(https://fonts.googleapis.com/css?family=Poiret+One|PT+Sans+Narrow:400,700); */
+@import url('https://fonts.googleapis.com/css?family=PT+Sans');
+
+.container-grid {
+  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-column-gap: 1em;
+  grid-row-gap: 2em;
+  grid-template-columns: auto auto auto auto;
+  position: absolute;
+  top: 65px;
+  width: 1280px;
+  height: 650px;
+}
