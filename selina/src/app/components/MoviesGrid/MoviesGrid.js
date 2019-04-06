@@ -10,12 +10,16 @@ class MoviesGrid extends React.Component {
     super(props);
   }
 
+  componentWillMount() {
+    this.result = results();
+  }
+
   render() {
     let { match } = this.props;
-    let favoritesMovies = store.getState().favorites;
+    let favoritesMovies = this.props.favorites || [];
     let favoriteMode = match && match.path === "/favorites";
     let moviesData =
-      favoriteMode && favoritesMovies ? favoritesMovies : results();
+      favoriteMode && favoritesMovies ? favoritesMovies : this.result;
     return (
       <div className="container-grid">
         {favoriteMode && !favoritesMovies.length ? (
@@ -44,7 +48,4 @@ const mapStateToProps = ({ favorites, location }) => ({
 
 const mapDispatchToProps = dispatch => ({});
 
-export const ConnectedMoviesGrid = connect(
-  null,
-  mapStateToProps
-)(MoviesGrid);
+export const ConnectedMoviesGrid = connect(mapStateToProps)(MoviesGrid);

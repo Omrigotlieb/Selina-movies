@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import "./SignUp.css";
 import { Input } from "../Input/Input";
-import * as mutations from "../../store/mutations";
+import * as actions from "../../store/actions";
 
 class SignUp extends React.Component {
   constructor(props) {
@@ -24,7 +24,7 @@ class SignUp extends React.Component {
           </div>
           <form onSubmit={signup}>
             <div className="username">
-              <span className="username-title">User name</span>
+              <span className="username-title">Email</span>
               <Input
                 className="username"
                 name="username"
@@ -65,7 +65,7 @@ const mapDispatchToProps = dispatch => {
       e.preventDefault();
       let username = e.target["username"].value;
       let password = e.target["password"].value;
-      dispatch(mutations.requestUserCreation(username, password));
+      dispatch(actions.requestUserCreation(username, password));
     }
   };
 };

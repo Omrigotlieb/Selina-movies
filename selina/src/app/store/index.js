@@ -6,7 +6,7 @@ import createSagaMiddleware from "redux-saga";
 
 const sagaMiddleware = createSagaMiddleware();
 import * as sagas from "./sagas";
-import * as mutations from "./mutations";
+import * as actions from "./actions";
 
 export const store = createStore(
   reducer,

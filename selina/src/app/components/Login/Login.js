@@ -2,13 +2,13 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 import { Input } from "../Input/Input";
-import * as mutations from "../../store/mutations";
+import * as actions from "../../store/actions";
 import "./Login.css";
 
 class Login extends React.Component {
   render() {
     let { authenticated, authentication, location } = this.props;
-    if (authenticated === mutations.AUTHENTICATED) {
+    if (authenticated === actions.AUTHENTICATED) {
       return <Redirect from="/login" to="/movies" />;
     } else {
       return (
@@ -24,7 +24,7 @@ class Login extends React.Component {
             </div>
             <form onSubmit={authentication}>
               <div className="username">
-                <span className="username-title">User name</span>
+                <span className="username-title">Email</span>
                 <Input
                   className="username"
                   name="username"
@@ -53,9 +53,9 @@ class Login extends React.Component {
                 </div>
               </div>
               <div className="failed">
-                {authenticated === mutations.NOT_AUTHENTICATED ? (
+                {authenticated === actions.NOT_AUTHENTICATED ? (
                   <span className="failed-title">
-                    Sorry but you are not part of Selina
+                    Check your details once again!
                   </span>
                 ) : null}
               </div>
@@ -93,7 +93,7 @@ const mapDispatchToProps = dispatch => {
       e.preventDefault();
       let username = e.target["username"].value;
       let password = e.target["password"].value;
-      dispatch(mutations.requestAuthenticateUser(username, password));
+      dispatch(actions.requestAuthenticateUser(username, password));
     }
   };
 };

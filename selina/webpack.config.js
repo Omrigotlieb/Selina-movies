@@ -1,6 +1,13 @@
 // import path from 'path';
 
 const path = require("path");
+// const { InjectManifest } = require("workbox-webpack-plugin");
+
+// plugins: [
+//   new InjectManifest({
+//     swSrc: "sw.js"
+//   })
+// ],
 // export default {
 module.exports = {
   mode: "development",
@@ -10,6 +17,7 @@ module.exports = {
     filename: "bundle.js",
     publicPath: "/"
   },
+
   devtool: "#eval-source-map",
   resolve: {
     extensions: [".js", ".jsx"]

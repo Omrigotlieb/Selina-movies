@@ -6,14 +6,11 @@ const authenticationTokens = [];
 
 async function createUserState(user) {
   let db = await connectDB();
-
-  let favorites = await db
-    .collection("users")
-    .find({ id: user.id })
-    .toArray();
-
+  let collection = await db.collection("users");
+  let usersCollection = await collection.find({ id: user.id }).toArray();
+  // const users = user.name === "admin" ? collection : [];
   return {
-    favorites,
+    usersCollection,
     session: { authenticated: "AUTHENTICATED", id: user.id }
   };
 }
@@ -59,7 +56,6 @@ export const authenticationRoute = app => {
     }
 
     let userID = uuid();
-
     await collection.insertOne({
       name: username,
       id: userID,

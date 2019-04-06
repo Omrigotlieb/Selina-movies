@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { store } from "../../store";
-import * as mutations from "../../store/mutations";
+import * as actions from "../../store/actions";
 import "./MovieCard.css";
 
 class MovieCard extends React.Component {
@@ -65,19 +65,19 @@ class MovieCard extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-  favorites: state.favorites,
-  match: state.match,
-  userID: state.session.id
+const mapStateToProps = ({ favorites, session, match }) => ({
+  favorites,
+  match,
+  userID: session.id
 });
 
 const mapDispatchToProps = dispatch => {
   return {
     like(userID, movie) {
-      dispatch(mutations.addToFavorites(userID, movie));
+      dispatch(actions.addToFavorites(userID, movie));
     },
     unlike(userID, movie) {
-      dispatch(mutations.removeFromFavorites(userID, movie));
+      dispatch(actions.removeFromFavorites(userID, movie));
     }
   };
 };

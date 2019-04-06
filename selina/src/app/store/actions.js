@@ -7,10 +7,20 @@ export const NOT_AUTHENTICATED = "NOT_AUTHENTICATED";
 export const SET_STATE = "SET_STATE";
 export const ADD_TO_FAVORITES = "ADD_TO_FAVORITES";
 export const REMOVE_FROM_FAVORITES = "REMOVE_FROM_FAVORITES";
+export const GET_LATEST_MOVIES = "GET_LATEST_MOVIES";
+export const API_KEY = "8ab7e0be43d0d5e7ac1a3e4987488db9";
+export const LANGUAGE = "en-US";
 
 export const setState = (state = {}) => ({
   type: SET_STATE,
   state
+});
+
+export const getLatestMovies = (userID, movie) => ({
+  type: GET_LATEST_MOVIES,
+  page,
+  key: API_KEY,
+  language: LANGUAGE
 });
 
 export const addToFavorites = (userID, movie) => ({
