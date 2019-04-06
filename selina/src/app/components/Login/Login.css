@@ -81,16 +81,22 @@ a:focus {
 .sign-up {
   color: #764ABC;
   margin: 0 auto;
+  outline: none;
 }
 
 .sign-in {
   margin: 0 auto;
+  outline: none;
 }
 
 .sign {
   align-items: center;
   display: flex;
   margin-top: 15px;
+}
+
+.login-button{
+  outline: none;
 }
 
 .login-button-title {

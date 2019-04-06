@@ -24,22 +24,20 @@ export const reducer = combineReducers({
         return userSession;
     }
   },
-  // movies(movies = [], action) {
-  //   let { type, latestMovies, page } = action;
-  //   switch (type) {
-  //     case actions.SET_STATE:
-  //       return action.state.movies || movies;
-  //     case actions.GET_LATEST_MOVIES:
-  //       let movies = latestMovies;
-  //       return { movies };
-  //     default:
-  //       return movies;
-  //   }
-  // },
+  movies(movies = [], action) {
+    let { type, page } = action;
+    switch (type) {
+      case actions.SET_STATE:
+        return action.state.movies || movies;
+      case actions.GET_LATEST_MOVIES:
+        return movies;
+      default:
+        return movies;
+    }
+  },
 
   favorites(favorites = [], action) {
     let { userID, movie } = action;
-    debugger;
     switch (action.type) {
       case actions.SET_STATE:
         return action.state.usersCollection && action.state.usersCollection[0].favorites || favorites;

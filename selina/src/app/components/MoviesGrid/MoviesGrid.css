@@ -33,3 +33,18 @@
   font-family: 'Allan', cursive;
   font-size: 60px;
 }
+
+.arrows {
+  border: 0;
+  outline: none;
+}
+
+.right-arrow-container {
+  justify-content: left;
+  display: flex;
+}
+
+.left-arrow-container {
+  justify-content: flex-end;
+  display: flex;
+}

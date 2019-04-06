@@ -6,17 +6,20 @@ import { history } from "./history";
 const url = "http://localhost:7777";
 const moviesAPIURL = "https://api.themoviedb.org/3/movie/now_playing?";
 
-// export function* getLatestMoviesSaga() {
-//   while (true) {
-//     const { page, language, key } = yield take(actions.GET_LATEST_MOVIES);
-//     const movies = yield fetch(
-//       `${moviesAPIURL}api_key=${key}&language=${language}&page=${page}`
-//     ).then(response => response.json());
-//     console.log("movies", movies);
-//
-//     yield put(actions.setState({ movies }));
-//   }
-// }
+export function* getLatestMoviesSaga() {
+  while (true) {
+    const { language, key, page } = yield take(actions.GET_LATEST_MOVIES);
+    try {
+    const response = yield fetch(`${moviesAPIURL}api_key=${key}&language=${language}&page=${page}`)
+    .then(res => res.json());
+    const movies = response.results;
+    yield put(actions.setState({ movies }));
+  } catch (e) {
+      //yield put(actions.fetchFailed(e));
+      //return ;
+  }
+  }
+}
 
 export function* removeFromFavoritesSaga() {
   while (true) {

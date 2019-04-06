@@ -16,7 +16,7 @@ export const setState = (state = {}) => ({
   state
 });
 
-export const getLatestMovies = (userID, movie) => ({
+export const getLatestMovies = (page = 1) => ({
   type: GET_LATEST_MOVIES,
   page,
   key: API_KEY,
