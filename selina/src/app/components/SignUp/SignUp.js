@@ -7,6 +7,9 @@ import * as actions from "../../store/actions";
 class SignUp extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      isEnabled: true
+    };
   }
 
   render() {

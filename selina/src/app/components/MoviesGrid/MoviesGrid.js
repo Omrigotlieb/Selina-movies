@@ -11,36 +11,36 @@ class MoviesGrid extends React.Component {
     super(props);
     this.state = {
       page: 1
-    }
+    };
     this.nextPage = this.nextPage.bind(this);
     this.previousPage = this.previousPage.bind(this);
   }
 
+  // fetch latest movie list
   async componentDidMount() {
-      this.props.fetchLatestMovies(this.state.page);
+    this.props.fetchLatestMovies(this.state.page);
   }
 
-  nextPage(){
+  nextPage() {
     this.props.fetchLatestMovies(this.state.page + 1);
-     this.setState({
-       page: this.state.page + 1
-     });
-   }
+    this.setState({
+      page: this.state.page + 1
+    });
+  }
 
-   previousPage(){
-     this.props.fetchLatestMovies(this.state.page - 1);
-      this.setState({
-        page: this.state.page - 1
-      });
-    }
+  previousPage() {
+    this.props.fetchLatestMovies(this.state.page - 1);
+    this.setState({
+      page: this.state.page - 1
+    });
+  }
 
   render() {
     let { match, results, movies } = this.props;
     const fetchNextPage = this.props.fetchLatestMovies;
     let favoritesMovies = this.props.favorites || [];
     let favoriteMode = match && match.path === "/favorites";
-    let moviesData =
-      favoriteMode && favoritesMovies ? favoritesMovies : movies;
+    let moviesData = favoriteMode && favoritesMovies ? favoritesMovies : movies;
     return (
       <div className="container-grid">
         {favoriteMode && !favoritesMovies.length ? (
@@ -57,17 +57,23 @@ class MoviesGrid extends React.Component {
             .slice(0, 12)
             .map((movie, i) => <ConnectedMovieCard movie={movie} key={i} />)
         )}
-        <div className="empty"/>
+        <div className="empty" />
         <div className="left-arrow-container">
-          {this.state.page != 1 && !favoriteMode ? <button onClick={this.previousPage} className="arrows"><i className="fa fa-arrow-circle-left fa-3x" aria-hidden="true" /></button> : null}
+          {this.state.page != 1 && !favoriteMode ? (
+            <button onClick={this.previousPage} className="arrows">
+              <i className="fa fa-arrow-circle-left fa-3x" aria-hidden="true" />
+            </button>
+          ) : null}
         </div>
         <div className="right-arrow-container">
-        { moviesData.length && !favoriteMode ?
-        <button onClick={this.nextPage} className="arrows">
-        <i className="fa fa-arrow-circle-right fa-3x" aria-hidden="true" />
-        </button>
-        :
-        null }
+          {moviesData.length && !favoriteMode ? (
+            <button onClick={this.nextPage} className="arrows">
+              <i
+                className="fa fa-arrow-circle-right fa-3x"
+                aria-hidden="true"
+              />
+            </button>
+          ) : null}
         </div>
       </div>
     );
@@ -88,4 +94,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export const ConnectedMoviesGrid = connect(mapStateToProps, mapDispatchToProps)(MoviesGrid);
+export const ConnectedMoviesGrid = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MoviesGrid);

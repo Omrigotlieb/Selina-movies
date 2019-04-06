@@ -17,21 +17,18 @@ authenticationRoute(app);
 export const addToFavorites = async (userID, movie) => {
   let db = await connectDB();
   let collection = db.collection("users");
-  console.log("add to favorite with", userID);
   await collection.updateOne({ id: userID }, { $push: { favorites: movie } });
 };
 
 export const removeFromFavorites = async (userID, movie) => {
   let db = await connectDB();
   let collection = db.collection("users");
-  console.log("Remove from favorite with", userID);
-  await collection.updateOne({ id: userID }, { $pull: { favorites:  movie } });
+  await collection.updateOne({ id: userID }, { $pull: { favorites: movie } });
 };
 
 app.post("/favorites/add", async (req, res) => {
   let movie = req.body.movie;
   let userID = req.body.userID;
-  console.log("Adding to favorites");
   await addToFavorites(userID, movie);
   res.status(200).send();
 });
@@ -39,7 +36,6 @@ app.post("/favorites/add", async (req, res) => {
 app.post("/favorites/remove", async (req, res) => {
   let movie = req.body.movie;
   let userID = req.body.userID;
-  console.log("Removing from favorites");
   await removeFromFavorites(userID, movie);
   res.status(200).send();
 });

@@ -58,7 +58,8 @@ export const defaultState = {
             "Husband and wife Gabe and Adelaide Wilson take their kids to their beach house expecting to unplug and unwind with friends. But as night descends, their serenity turns to tension and chaos when some shocking visitors arrive uninvited.",
           release_date: "2019-03-14"
         }
-      ]
+      ],
+      roll: 'Admin'
     },
     {
       id: "U2",

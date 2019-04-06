@@ -8,10 +8,14 @@ async function createUserState(user) {
   let db = await connectDB();
   let collection = await db.collection("users");
   let usersCollection = await collection.find({ id: user.id }).toArray();
-  // const users = user.name === "admin" ? collection : [];
+  //const admin = await collection.find({ id: user.id }, { roll: 1 });
   return {
     usersCollection,
-    session: { authenticated: "AUTHENTICATED", id: user.id }
+    session: {
+      authenticated: "AUTHENTICATED",
+      id: user.id,
+      admin: false
+    }
   };
 }
 
@@ -46,12 +50,11 @@ export const authenticationRoute = app => {
 
   app.post("/user/create", async (req, res) => {
     let { username, password } = req.body;
-    console.log(username, password);
     let db = await connectDB();
     let collection = db.collection("users");
     let user = await collection.findOne({ name: username });
     if (user) {
-      res.status(500).send({ message: "Username already exists." });
+      res.status(500).send({ message: "Email already exists." });
       return;
     }
 

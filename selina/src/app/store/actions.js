@@ -10,6 +10,8 @@ export const REMOVE_FROM_FAVORITES = "REMOVE_FROM_FAVORITES";
 export const GET_LATEST_MOVIES = "GET_LATEST_MOVIES";
 export const API_KEY = "8ab7e0be43d0d5e7ac1a3e4987488db9";
 export const LANGUAGE = "en-US";
+export const OPEN_MODAL = "OPEN_MODAL";
+export const CLOSE_MODAL = "CLOSE_MODAL";
 
 export const setState = (state = {}) => ({
   type: SET_STATE,

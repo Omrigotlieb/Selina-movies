@@ -10,14 +10,15 @@ export function* getLatestMoviesSaga() {
   while (true) {
     const { language, key, page } = yield take(actions.GET_LATEST_MOVIES);
     try {
-    const response = yield fetch(`${moviesAPIURL}api_key=${key}&language=${language}&page=${page}`)
-    .then(res => res.json());
-    const movies = response.results;
-    yield put(actions.setState({ movies }));
-  } catch (e) {
-      //yield put(actions.fetchFailed(e));
-      //return ;
-  }
+      const response = yield fetch(
+        `${moviesAPIURL}api_key=${key}&language=${language}&page=${page}`
+      ).then(res => res.json());
+      const movies = response.results;
+      yield put(actions.setState({ movies }));
+    } catch (e) {
+      // yield put(actions.fetchFailed(e));
+      // return ;
+    }
   }
 }
 
