@@ -79,7 +79,9 @@ export function* userCreationSaga() {
       history.push("/movies");
     } catch (e) {
       // If error put not-authenticated to state
+
       yield put(actions.processAuthenticateUser(actions.NOT_AUTHENTICATED));
+      throw e;
     }
   }
 }
@@ -104,6 +106,7 @@ export function* userAuthenticationSaga() {
     } catch (e) {
       // If error put not-authenticated to state
       yield put(actions.processAuthenticateUser(actions.NOT_AUTHENTICATED));
+      throw e;
     }
   }
 }

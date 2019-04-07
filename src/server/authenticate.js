@@ -4,12 +4,15 @@ import { connectDB } from "./connect-db";
 
 const authenticationTokens = [];
 
+
+// Create new user with a state of: usersCollection and session.
+// Admin will get admin roll in session and otherUsers dada.
 async function createUserState(user) {
   let db = await connectDB();
   let collection = await db.collection("users");
   let otherUsers = await collection
     .find({
-      $or: [{ roll: { $not: { $regex: "Admin" } } }]
+      $or: [{ roll: { $not: { "Admin" } } }]
     })
     .toArray();
 
@@ -35,6 +38,7 @@ async function createUserState(user) {
   };
 }
 
+// Search in db for the user and checks for matching password.
 export const authenticationRoute = app => {
   app.post("/authenticate", async (req, res) => {
     let { username, password } = req.body;
@@ -64,6 +68,7 @@ export const authenticationRoute = app => {
     res.send({ token, state });
   });
 
+  // Create new user in db
   app.post("/user/create", async (req, res) => {
     let { username, password } = req.body;
     let db = await connectDB();
