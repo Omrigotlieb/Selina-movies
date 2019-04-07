@@ -18,20 +18,23 @@ export const setState = (state = {}) => ({
   state
 });
 
-export const getLatestMovies = (page = 1) => ({
+export const getLatestMovies = (state = {}, page = 1) => ({
+  state,
   type: GET_LATEST_MOVIES,
   page,
   key: API_KEY,
   language: LANGUAGE
 });
 
-export const addToFavorites = (userID, movie) => ({
+export const addToFavorites = (state = {}, userID, movie) => ({
+  state,
   type: ADD_TO_FAVORITES,
   userID,
   movie
 });
 
-export const removeFromFavorites = (userID, movie) => ({
+export const removeFromFavorites = (state = {}, userID, movie) => ({
+  state,
   type: REMOVE_FROM_FAVORITES,
   userID,
   movie

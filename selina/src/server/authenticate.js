@@ -7,14 +7,30 @@ const authenticationTokens = [];
 async function createUserState(user) {
   let db = await connectDB();
   let collection = await db.collection("users");
+  let otherUsers = await collection
+    .find({
+      $or: [{ roll: { $not: { $regex: "Admin" } } }]
+    })
+    .toArray();
+
+  console.log("otherUsers", otherUsers);
   let usersCollection = await collection.find({ id: user.id }).toArray();
-  //const admin = await collection.find({ id: user.id }, { roll: 1 });
+  let admin = await collection.find({ id: user.id }, { roll: 1 }).toArray();
+  // If in admin mode set admin else reset all otherUsers collection from state.
+  console.log("hey - the admin is:", admin);
+  if (admin) {
+    admin = admin[0]["roll"];
+  } else {
+    otherUsers = [];
+  }
+
   return {
     usersCollection,
     session: {
       authenticated: "AUTHENTICATED",
       id: user.id,
-      admin: false
+      admin,
+      otherUsers
     }
   };
 }

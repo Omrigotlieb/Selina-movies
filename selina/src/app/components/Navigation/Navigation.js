@@ -46,8 +46,8 @@ class Navigation extends React.Component {
   }
 }
 
-const mapStateToProps = ({ admin }) => ({
-  admin
+const mapStateToProps = state => ({
+  admin: state.session.admin
 });
 
 export const ConnectedNavigation = connect(mapStateToProps)(Navigation);

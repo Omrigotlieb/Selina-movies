@@ -10,11 +10,20 @@ class MovieCard extends React.Component {
   }
 
   render() {
-    let { movie, key, like, unlike, favorites, match, userID } = this.props;
+    let {
+      movie,
+      key,
+      like,
+      unlike,
+      favorites,
+      match,
+      userID,
+      otherUsers,
+      state
+    } = this.props;
     let isFavorite = favorites.filter(item => item.id === movie.id).length;
     let url = "https://image.tmdb.org/t/p/w500/";
     let imgSrc = `${url}${movie["poster_path"]}`;
-    let state = store.getState();
     let overview = movie.overview;
     let shortOverview = overview ? overview.slice(0, 207) + "..." : "";
     let title = movie.title;
@@ -34,11 +43,14 @@ class MovieCard extends React.Component {
           </div>
           <div className="heart">
             {isFavorite ? (
-              <div className="like" onClick={() => unlike(userID, movie)}>
+              <div
+                className="like"
+                onClick={() => unlike(state, userID, movie)}
+              >
                 <i className="fa fa-heart" aria-hidden="true" />
               </div>
             ) : (
-              <div className="like" onClick={() => like(userID, movie)}>
+              <div className="like" onClick={() => like(state, userID, movie)}>
                 <i className="fa fa-heart-o" aria-hidden="true" />
               </div>
             )}
@@ -65,7 +77,9 @@ class MovieCard extends React.Component {
   }
 }
 
-const mapStateToProps = ({ favorites, session, match }) => ({
+const mapStateToProps = ({ state, otherUsers, favorites, session, match }) => ({
+  state,
+  otherUsers,
   favorites,
   match,
   userID: session.id
@@ -73,11 +87,11 @@ const mapStateToProps = ({ favorites, session, match }) => ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    like(userID, movie) {
-      dispatch(actions.addToFavorites(userID, movie));
+    like(state, userID, movie) {
+      dispatch(actions.addToFavorites(state, userID, movie));
     },
-    unlike(userID, movie) {
-      dispatch(actions.removeFromFavorites(userID, movie));
+    unlike(state, userID, movie) {
+      dispatch(actions.removeFromFavorites(state, userID, movie));
     }
   };
 };

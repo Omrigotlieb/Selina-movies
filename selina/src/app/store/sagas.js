@@ -8,13 +8,15 @@ const moviesAPIURL = "https://api.themoviedb.org/3/movie/now_playing?";
 
 export function* getLatestMoviesSaga() {
   while (true) {
-    const { language, key, page } = yield take(actions.GET_LATEST_MOVIES);
+    const { language, key, page, state } = yield take(
+      actions.GET_LATEST_MOVIES
+    );
     try {
       const response = yield fetch(
         `${moviesAPIURL}api_key=${key}&language=${language}&page=${page}`
       ).then(res => res.json());
       const movies = response.results;
-      yield put(actions.setState({ movies }));
+      yield put(actions.setState({ ...state, movies: movies }));
     } catch (e) {
       // yield put(actions.fetchFailed(e));
       // return ;
@@ -52,6 +54,8 @@ export function* userCreationSaga() {
         username,
         password
       });
+
+      //todo delete set state
       yield put(actions.setState(data.state));
       yield put(actions.processAuthenticateUser(actions.AUTHENTICATED));
       yield put(actions.setState(data.state));

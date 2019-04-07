@@ -4,18 +4,25 @@ import * as actions from "./actions";
 let defaultState = {
   session: {},
   favorites: [],
-  users: []
+  users: [],
+  movies: []
 };
 
 export const reducer = combineReducers({
   session(userSession = defaultState.session, action) {
-    let { type, authenticated, session } = action;
+    let { type, authenticated, admin } = action;
+    const session = (action && action.state && action.state.session) || [];
     switch (type) {
       case actions.SET_STATE:
-        let id = (userSession && userSession.id) || action.state.session.id;
-        let admin = (session && session.admin) || false;
-        let collection = (session && session.collection) || [];
-        return { ...userSession, id, admin, collection };
+        const id =
+          (userSession && userSession.id) ||
+          (action.state.session && action.state.session.id);
+        const admin = (session && session.admin) || userSession.admin || false;
+        const otherUsers =
+          (session && session.otherUsers) ||
+          (userSession && userSession.otherUsers) ||
+          [];
+        return { ...userSession, id, admin, otherUsers };
       case actions.REQUEST_USER_CREATION:
         return { ...userSession, authenticated: actions.AUTHENTICATED };
       case actions.REQUEST_AUTHENTICATE_USER:
@@ -27,21 +34,18 @@ export const reducer = combineReducers({
     }
   },
 
-  // admin(admin = false, action) {
-  //   let { session, type } = action;
-  //   switch (type) {
-  //     case actions.SET_STATE:
-  //       return session.admin || admin;
-  //     default:
-  //       return admin;
-  //   }
-  // },
-
-  movies(movies = [], action) {
-    let { type, page } = action;
+  movies(movies = defaultState.movies, action) {
+    let { type, page, state } = action;
+    movies = state
+      ? state.movies
+        ? state.movies
+        : movies.length
+        ? movies
+        : []
+      : [];
     switch (type) {
       case actions.SET_STATE:
-        return action.state.movies || movies;
+        return movies;
       case actions.GET_LATEST_MOVIES:
         return movies;
       default:
@@ -50,7 +54,7 @@ export const reducer = combineReducers({
   },
 
   favorites(favorites = [], action) {
-    let { userID, movie } = action;
+    let { userID, movie, state = defaultState } = action;
     switch (action.type) {
       case actions.SET_STATE:
         return (

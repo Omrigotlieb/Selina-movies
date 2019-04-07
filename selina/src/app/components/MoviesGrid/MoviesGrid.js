@@ -17,26 +17,26 @@ class MoviesGrid extends React.Component {
   }
 
   // fetch latest movie list
-  async componentDidMount() {
-    this.props.fetchLatestMovies(this.state.page);
+  componentDidMount() {
+    this.props.fetchLatestMovies(this.props, this.state.page);
   }
 
   nextPage() {
-    this.props.fetchLatestMovies(this.state.page + 1);
+    this.props.fetchLatestMovies(this.props, this.state.page + 1);
     this.setState({
       page: this.state.page + 1
     });
   }
 
   previousPage() {
-    this.props.fetchLatestMovies(this.state.page - 1);
+    this.props.fetchLatestMovies(this.props, this.state.page - 1);
     this.setState({
       page: this.state.page - 1
     });
   }
 
   render() {
-    let { match, results, movies } = this.props;
+    let { match, results, movies, session } = this.props;
     const fetchNextPage = this.props.fetchLatestMovies;
     let favoritesMovies = this.props.favorites || [];
     let favoriteMode = match && match.path === "/favorites";
@@ -80,7 +80,8 @@ class MoviesGrid extends React.Component {
   }
 }
 
-const mapStateToProps = ({ movies, favorites, location }) => ({
+const mapStateToProps = ({ movies, favorites, location, session }) => ({
+  session,
   movies,
   favorites,
   location
@@ -88,8 +89,8 @@ const mapStateToProps = ({ movies, favorites, location }) => ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchLatestMovies(page) {
-      dispatch(actions.getLatestMovies(page));
+    fetchLatestMovies(state, page) {
+      dispatch(actions.getLatestMovies(state, page));
     }
   };
 };
