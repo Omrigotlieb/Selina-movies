@@ -4,19 +4,18 @@ import { connectDB } from "./connect-db";
 
 const authenticationTokens = [];
 
-
 // Create new user with a state of: usersCollection and session.
 // Admin will get admin roll in session and otherUsers dada.
 async function createUserState(user) {
   let db = await connectDB();
   let collection = await db.collection("users");
-  let otherUsers = await collection
-    .find({
-      $or: [{ roll: { $not: { "Admin" } } }]
-    })
-    .toArray();
+  let otherUsers = [];
+  // await collection
+  //   .find({
+  //     $or: [{ roll: { $not: { "Admin" } } }]
+  //   })
+  //   .toArray();
 
-  console.log("otherUsers", otherUsers);
   let usersCollection = await collection.find({ id: user.id }).toArray();
   let admin = await collection.find({ id: user.id }, { roll: 1 }).toArray();
   // If in admin mode set admin else reset all otherUsers collection from state.
