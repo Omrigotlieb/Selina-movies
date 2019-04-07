@@ -72,10 +72,12 @@
   height: 42px;
   border-radius: 21px;
   background-color: #764ABC;
+  outline: none;
 }
 
 .sign-in {
   margin: 0 auto;
+  outline: none;
 }
 
 .sign {
