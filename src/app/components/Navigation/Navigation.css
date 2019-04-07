@@ -11,7 +11,7 @@
 
 .logo {
   width: 195px;
-  height: 60px;
+  height: 63px;
 
 }
 
@@ -34,7 +34,9 @@
 .nav span {
   font-family: 'Allan', cursive;
   font-size: 45px;
-  line-height: 76px;
+  line-height: 39px;
+  text-align: top;
+  margin-left: 26px;
 }
 
 a.about {

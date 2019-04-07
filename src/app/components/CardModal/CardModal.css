@@ -7,10 +7,8 @@
   transform: translate(-50%,-50%);
   height: 90%;
   width: 90%;
-  border: 4px solid cornsilk;
   z-index: 9999;
-  border-radius: 33px;
-  box-shadow: 0 12px 4px 0 rgba(0, 0, 0, 1);
+  box-shadow: 0 0px 15px 8px rgb(157, 156, 156);
 }
 
 .modal-x {
@@ -51,15 +49,14 @@
 }
 
 .modal-rating {
-  position: absolue;
   background: transparent;
   z-index: 99999;
   display: flex;
-  position: relative;
+  position: absolute;
   justify-content: flex-start;
   transform: rotate(-30deg);
-  bottom: 84%;
-  right: 5%;
+  top: 20%;
+  left: 2%;
 }
 
 .modal-rating .fa{

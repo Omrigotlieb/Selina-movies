@@ -68,7 +68,7 @@ export default class Main extends React.Component {
               path="/movies"
               component={ConnectedMoviesGrid}
             />
-            <PrivateRoute exact path="/about" component={About} />
+            <Route exact path="/about" component={About} />
             <PrivateRoute
               exact
               path="/favorites"
