@@ -20,7 +20,8 @@
     "uuid": "^3.3.2"
   },
   "scripts": {
-    "start": "webpack",
+    "start": "npm run server",
+    "build": "webpack -p",
     "dev": "webpack-dev-server --open",
     "initialize": "babel-node src/server/initialize-db",
     "server": "babel-node src/server/server",

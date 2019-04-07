@@ -3,7 +3,8 @@ import uuid from "uuid";
 import axios from "axios";
 import * as actions from "./actions";
 import { history } from "./history";
-const url = "http://localhost:7777";
+const url =
+  process.env.NODE_ENV === "production" ? "" : "http://localhost:7777";
 const moviesAPIURL = "https://api.themoviedb.org/3/movie/now_playing?";
 
 export function* getLatestMoviesSaga() {
