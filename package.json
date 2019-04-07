@@ -2,6 +2,9 @@
   "name": "selina",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "11.9.0"
+  },
   "dependencies": {
     "axios": "^0.18.0",
     "babel-cli": "^7.0.0",
