@@ -5,7 +5,7 @@ import { connectDB } from "./connect-db";
 import "./initialize-db";
 import { authenticationRoute } from "./authenticate";
 import path from "path";
-let port = proccess.env.PORT || 7777;
+let port = process.env.PORT || 7777;
 
 let app = express();
 app.listen(port, console.log("listening on port", port));
