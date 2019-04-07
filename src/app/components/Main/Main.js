@@ -9,11 +9,12 @@ import { ConnectedMovieCard } from "../MovieCard/MovieCard";
 import { ConnectedLogin } from "../Login/Login";
 import { About } from "../About/About";
 import { ConnectedSignUp } from "../SignUp/SignUp";
-import Loader from "../Loader/Loader";
-
+import { ConnectedAdmin } from "../Admin/Admin";
+import LoadingBar from "react-redux-loading-bar";
 import "./Main.css";
-import loader from "../../../assets/loader.gif";
 
+// This PrivateRoute function will render the component only if the user is logged in and
+//authenticated, otherwise the function will redirect the user to the login page.
 function PrivateRoute({ component: Component, ...rest }) {
   let auth = store.getState().session.authenticated;
   return (
@@ -36,48 +37,37 @@ function PrivateRoute({ component: Component, ...rest }) {
 }
 
 export default class Main extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      isLoading: true
-    };
-  }
-
+  //require background image;
   async componentDidMount() {
     await require("../../../assets/subpattern.png");
-    this.setState({ isLoading: false });
   }
 
+  // Main component will render the router and the provider of the redux store.
+  // Loading bar will show when showLoading action is dispatched
+  // all the 'Connected' + component is wrapped by a connect and
+  // get mapStateToProps and mapDispatchToProps if declared.
   render() {
-    let { isLoading } = this.state;
-    if (isLoading) {
-      return <Loader />;
-    } else {
-      return (
-        <Router history={history}>
-          <Provider store={store}>
-            <ConnectedNavigation />
-            {!store.getState().session.authenticated ? (
-              <Redirect from="/" to="/login" />
-            ) : null}
-            <Route exact path="/login" component={ConnectedLogin} />
-            <Route exact path="/signup" component={ConnectedSignUp} />
-            <PrivateRoute
-              exact
-              path="/movies"
-              component={ConnectedMoviesGrid}
-            />
-            <Route exact path="/about" component={About} />
-            <PrivateRoute
-              exact
-              path="/favorites"
-              view="favorites"
-              component={ConnectedMoviesGrid}
-            />
-          </Provider>
-        </Router>
-      );
-    }
+    return (
+      <Router history={history}>
+        <Provider store={store}>
+          <LoadingBar />
+          <ConnectedNavigation />
+          {!store.getState().session.authenticated ? (
+            <Redirect from="/" to="/login" />
+          ) : null}
+          <Route exact path="/login" component={ConnectedLogin} />
+          <Route exact path="/signup" component={ConnectedSignUp} />
+          <Route exact path="/admin" component={ConnectedAdmin} />
+          <PrivateRoute exact path="/movies" component={ConnectedMoviesGrid} />
+          <Route exact path="/about" component={About} />
+          <PrivateRoute
+            exact
+            path="/favorites"
+            view="favorites"
+            component={ConnectedMoviesGrid}
+          />
+        </Provider>
+      </Router>
+    );
   }
 }

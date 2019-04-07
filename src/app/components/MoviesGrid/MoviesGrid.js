@@ -6,6 +6,8 @@ import { results } from "../../../data/movies";
 import { ConnectedMovieCard } from "../MovieCard/MovieCard";
 import notfound from "../../../assets/notfound.png";
 import * as actions from "../../store/actions";
+import { resetLoading } from "react-redux-loading-bar";
+
 class MoviesGrid extends React.Component {
   constructor(props) {
     super(props);
@@ -16,18 +18,26 @@ class MoviesGrid extends React.Component {
     this.previousPage = this.previousPage.bind(this);
   }
 
-  // fetch latest movie list
+  // Fetch latest movie list if not in favorites mode
+  // the api call needs to be from the client side therefore in componentDidmount.
+  // After fetch reset Loading Bar
   componentDidMount() {
-    this.props.fetchLatestMovies(this.props, this.state.page);
+    if (this.props.match.path !== "/favorites") {
+      this.props.fetchLatestMovies(this.props, this.state.page);
+      this.props.resetLoadingBar();
+    }
   }
 
+  // On right arrow click fetchLatestMovies will dispatch and will fetch the next page;
   nextPage() {
     this.props.fetchLatestMovies(this.props, this.state.page + 1);
     this.setState({
       page: this.state.page + 1
     });
+    this.props.resetLoadingBar();
   }
 
+  // On left arrow click fetchLatestMovies will dispatch and will fetch the previous page;
   previousPage() {
     this.props.fetchLatestMovies(this.props, this.state.page - 1);
     this.setState({
@@ -35,10 +45,15 @@ class MoviesGrid extends React.Component {
     });
   }
 
+  // MoviesGrid will render the a grid of all the movie cards or favorites.
+  // The map function would iterate over the moviesData array and will create ConnectedMovieCard.
+  // The moviesData is sliced to 12 for better UX and UI.
+  // If the favorite movies still does not exist it will render a div with a message.
   render() {
     let { match, results, movies, session } = this.props;
     const fetchNextPage = this.props.fetchLatestMovies;
     let favoritesMovies = this.props.favorites || [];
+    //Check if in favorites mode.
     let favoriteMode = match && match.path === "/favorites";
     let moviesData = favoriteMode && favoritesMovies ? favoritesMovies : movies;
     return (
@@ -87,8 +102,14 @@ const mapStateToProps = ({ movies, favorites, location, session }) => ({
   location
 });
 
+// Fetch latest movies would dispatch an action and getLatestMoviesSaga
+// in Sagas.js will fetch all the new movies, by page, and will set state for
+// the recived movies.
 const mapDispatchToProps = dispatch => {
   return {
+    resetLoadingBar() {
+      dispatch(resetLoading());
+    },
     fetchLatestMovies(state, page) {
       dispatch(actions.getLatestMovies(state, page));
     }

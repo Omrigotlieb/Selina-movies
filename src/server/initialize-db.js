@@ -1,7 +1,9 @@
 import { defaultState } from "./defaultState";
 import { connectDB } from "./connect-db";
 
-//initializes the database with sample user
+// Initializes the database with sample user if the default user exist
+// the db exist and there is no need to initialize it.
+// Will run by the command `npm run initialize`
 async function initializeDB() {
   let db = await connectDB();
   let user = await db.collection("users").findOne({ id: "U1" });

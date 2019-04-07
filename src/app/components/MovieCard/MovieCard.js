@@ -5,6 +5,7 @@ import * as actions from "../../store/actions";
 import "./MovieCard.css";
 import { Modal } from "../CardModal/CardModal";
 
+// Toggle CardModal on click using react hooks;
 const ToggleContent = ({ toggle, content }) => {
   const [isShown, setIsShown] = React.useState(false);
   const hide = () => setIsShown(false);
@@ -18,11 +19,9 @@ const ToggleContent = ({ toggle, content }) => {
   );
 };
 
+// Render a single movie card with the given data.
+// The render has ToggleContent for the modal.
 class MovieCard extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     let {
       movie,
@@ -32,15 +31,16 @@ class MovieCard extends React.Component {
       favorites,
       match,
       userID,
-      otherUsers,
       state
     } = this.props;
-    let isFavorite = favorites.filter(item => item.id === movie.id).length;
-    let url = "https://image.tmdb.org/t/p/w500/";
-    let imgSrc = `${url}${movie["poster_path"]}`;
-    let backdropImgSrc = `${url}${movie["backdrop_path"]}`;
-    let overview = movie.overview;
+    const isFavorite = favorites.filter(item => item.id === movie.id).length;
+    const url = "https://image.tmdb.org/t/p/w500/";
+    const imgSrc = `${url}${movie["poster_path"]}`;
+
+    // if overview is long slice it for the card grid.
+    const overview = movie.overview;
     let shortOverview = overview ? overview.slice(0, 207) + "..." : "";
+
     let title = movie.title;
     let vote_average = movie["vote_average"];
     let release_date = movie["release_date"];
@@ -108,6 +108,7 @@ const mapStateToProps = ({ state, otherUsers, favorites, session, match }) => ({
   userID: session.id
 });
 
+// Like and unlike will add the movie to favorites by dispacthing an action.
 const mapDispatchToProps = dispatch => {
   return {
     like(e, state, userID, movie) {
@@ -119,6 +120,7 @@ const mapDispatchToProps = dispatch => {
     }
   };
 };
+
 export const ConnectedMovieCard = connect(
   mapStateToProps,
   mapDispatchToProps

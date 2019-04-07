@@ -12,8 +12,10 @@ app.listen(port, console.log("listening on port", port));
 
 app.use(cors(), bodyParser.urlencoded({ extended: true }), bodyParser.json());
 
+// app.post for /authenticate post request
 authenticationRoute(app);
 
+// If production change path to dist
 if (process.env.NODE_ENV == "production") {
   app.use(express.static(path.resolve(__dirname, "../../dist")));
   app.get("/*", (req, res) => {
@@ -21,18 +23,21 @@ if (process.env.NODE_ENV == "production") {
   });
 }
 
+// Add movie to favorites array in db
 export const addToFavorites = async (userID, movie) => {
   let db = await connectDB();
   let collection = db.collection("users");
   await collection.updateOne({ id: userID }, { $push: { favorites: movie } });
 };
 
+// Remove movie from favorites array in db
 export const removeFromFavorites = async (userID, movie) => {
   let db = await connectDB();
   let collection = db.collection("users");
   await collection.updateOne({ id: userID }, { $pull: { favorites: movie } });
 };
 
+// handle add to favorites post request
 app.post("/favorites/add", async (req, res) => {
   let movie = req.body.movie;
   let userID = req.body.userID;
@@ -40,6 +45,7 @@ app.post("/favorites/add", async (req, res) => {
   res.status(200).send();
 });
 
+// handle remove from favorites post request
 app.post("/favorites/remove", async (req, res) => {
   let movie = req.body.movie;
   let userID = req.body.userID;

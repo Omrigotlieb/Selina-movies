@@ -1,5 +1,6 @@
 import { combineReducers } from "redux";
 import * as actions from "./actions";
+import { loadingBarReducer } from "react-redux-loading-bar";
 
 let defaultState = {
   session: {},
@@ -36,6 +37,7 @@ export const reducer = combineReducers({
 
   movies(movies = defaultState.movies, action) {
     let { type, page, state } = action;
+    // TODO fix movie reducer code
     movies = state
       ? state.movies
         ? state.movies
@@ -73,5 +75,6 @@ export const reducer = combineReducers({
       default:
         return favorites;
     }
-  }
+  },
+  loadingBar: loadingBarReducer
 });

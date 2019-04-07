@@ -5,13 +5,6 @@ import { Input } from "../Input/Input";
 import * as actions from "../../store/actions";
 
 class SignUp extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isEnabled: true
-    };
-  }
-
   render() {
     let { signup } = this.props;
     return (
@@ -62,6 +55,8 @@ class SignUp extends React.Component {
   }
 }
 
+// authentication function would set the starting point of the authentication flow.
+// userCreationSaga in sagas.js will take the action and will post it to the server.
 const mapDispatchToProps = dispatch => {
   return {
     signup(e) {
@@ -73,6 +68,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
+// The null is empty mapStateToProps
 export const ConnectedSignUp = connect(
   null,
   mapDispatchToProps

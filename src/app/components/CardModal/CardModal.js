@@ -3,11 +3,11 @@ import ReactDOM from "react-dom";
 import "./CardModal.css";
 
 export const Modal = ({ movie, children, hide }) => {
-  let url = "https://image.tmdb.org/t/p/w500";
-  let imgSrc = `${url}${movie["poster_path"]}`;
   let backdropUrl = "https://image.tmdb.org/t/p/w1280";
   let backdropImgSrc = `${backdropUrl}${movie["backdrop_path"]}`;
 
+  // set dynamic background according to the movie.
+  // Uses the backdrop image of the movie.
   var modalStyle = {
     background: `url(${backdropImgSrc}) no-repeat center center`,
     backgroundSize: "cover"

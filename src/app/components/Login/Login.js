@@ -6,6 +6,8 @@ import * as actions from "../../store/actions";
 import "./Login.css";
 
 class Login extends React.Component {
+  // if user is authenticate he will redirect to movies
+
   render() {
     let { authenticated, authentication, location } = this.props;
     if (authenticated === actions.AUTHENTICATED) {
@@ -83,10 +85,13 @@ class Login extends React.Component {
   }
 }
 
+// Get from the state if the user is authenticated
 const mapStateToProps = ({ session }) => ({
   authenticated: session.authenticated
 });
 
+// authentication function would set the starting point of the authentication flow.
+// userAuthenticationSaga in sagas.js will take the action and will post it to the server.
 const mapDispatchToProps = dispatch => {
   return {
     authentication(e) {

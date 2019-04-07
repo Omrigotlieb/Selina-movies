@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css?family=Bangers');
+
+.admin-panel {
+  font-family: 'Bangers', cursive;
+  position: absolute;
+  width: 300px;
+  height: 450px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  color: black;
+  display: flex;
+}
+
+.admin-panel li {
+  list-style-type: none;
+}
+
+.pika {
+  height: 300px;
+  width: 300px;
+}
