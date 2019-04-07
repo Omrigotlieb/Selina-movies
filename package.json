@@ -24,12 +24,14 @@
     "uuid": "^3.3.2"
   },
   "scripts": {
-    "start": "npm run server",
-    "build": "webpack -p",
     "dev": "webpack-dev-server --open",
     "initialize": "babel-node src/server/initialize-db",
     "server": "babel-node src/server/server",
     "server-test": "babel-node src/server/server.spec",
+    "clean": "rm -rf build && mkdir build",
+    "build-babel": "babel -d ./build ./src -s",
+    "build": "npm run clean && npm run build-babel && webpack -p",
+    "start": "npm run build && npm run server && node ./build/index.js",
     "start-dev": "concurrently \"npm run server\" \"npm run dev\""
   },
   "devDependencies": {
